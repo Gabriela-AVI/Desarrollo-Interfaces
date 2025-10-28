@@ -2,7 +2,7 @@
 #Ejercicio 10: Scrollbar
 
 """
-Crea un Text con un texto largo (varios párrafos) y añade una barra de desplazamiento vertical (Scrollbar).
+Crea un Text con un texto largo(2 párrafos) y añade una barra de desplazamiento vertical (Scrollbar).
 * Recuerda conectar ambos widgets con scrollcommand y command:
     scroll.config(command=texto.yview) y texto.config(yscrollcommand=scroll.set).
 """
@@ -10,32 +10,38 @@ Crea un Text con un texto largo (varios párrafos) y añade una barra de desplaz
 import tkinter as tk
 
 def insertar_texto():
-    for i in range(1,101):
-        cuadro_texto.insert(tk.END, f"Línea {i}\n")
+    parrafo1 = """Este ejemplo muestra la estructura básica de una aplicación en Tkinter: cómo crear la ventana principal, añadir widgets y responder a acciones del usuario. Un programa en Tkinter suele tener siempre las siguientes partes:"""
 
-    cuadro_texto.insert(tk.END, f"")
-    cuadro_texto.insert(tk.END, f"")
+    parrafo2 = """1. Importación de la librería: import tkinter as tk
+2. Definición de funciones o clases que controlan el comportamiento de la interfaz.
+3. Creación de la ventana principal: root = tk.Tk()
+4. Creación y colocación de widgets.
+5. Ejecución del bucle principal: root.mainloop()
+
+Es recomendable definir las funciones antes de crear los widgets que las usan, y mantener el código organizado agrupando la creación de la interfaz dentro de funciones o clases."""
+
+    texto.insert(tk.END, parrafo1 + "\n\n" + parrafo2)
+
 
 root = tk.Tk()
 root.title("10_Scrollbar_Gabriela.A.V.I")
-root.geometry("400x500")
+root.geometry("300x300")
 
-#Crear Frame para contener Text y la Scrollbar
+# Crear Frame para contener el Text y la Scrollbar
 frame = tk.Frame(root)
 frame.pack(fill="both", expand=True)
 
-# Líneas permiten que los widgets se expandan correctamente
-frame.rowconfigure(0, weight=1)
-frame.columnconfigure(0, weight=1)
+# Crear el widget Text
+texto = tk.Text(frame, wrap="word")
+texto.pack(expand=True)
 
-#Crear el Text
-cuadro_texto = tk.Text(frame, wrap="none")
-cuadro_texto.grid(row=0, column=0, sticky="nsew")
+# Crear Scrollbar vertical
+scroll = tk.Scrollbar(frame)
+scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
-#Crear Scrollbar vertical
-scroll_vertical = tk.Scrollbar(frame, orient="vertical",command=cuadro_texto.yview)
-scroll_vertical.grid(row=0, column=1, sticky="ns")
-cuadro_texto.config(yscrollcommand=scroll_vertical.set)
+# Conectar ambos widgets
+texto.config(yscrollcommand=scroll.set)
+scroll.config(command=texto.yview)
 
 #Insertar texto
 insertar_texto()
