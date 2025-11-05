@@ -1,5 +1,5 @@
 
-#2. CALCULADORA
+#2. CALCULADORA (Gabriela A.V.I)
 
 from operaciones import suma, resta, multiplicacion, division
 

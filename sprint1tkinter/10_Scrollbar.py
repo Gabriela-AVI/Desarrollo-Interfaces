@@ -1,5 +1,5 @@
 
-#Ejercicio 10: Scrollbar
+# Ejercicio 10: Scrollbar
 
 """
 Crea un Text con un texto largo(2 párrafos) y añade una barra de desplazamiento vertical (Scrollbar).
@@ -30,6 +30,10 @@ root.geometry("300x300")
 # Crear Frame para contener el Text y la Scrollbar
 frame = tk.Frame(root)
 frame.pack(fill="both", expand=True)
+
+# Widgets internos crezcan al redimensionar la ventana
+frame.rowconfigure(0, weight=1)
+frame.columnconfigure(0, weight=1)
 
 # Crear el widget Text
 texto = tk.Text(frame, wrap="word")

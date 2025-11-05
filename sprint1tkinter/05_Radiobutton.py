@@ -15,14 +15,14 @@ def cambiar_color():
 
 root = tk.Tk()
 root.title("05_Radiobutton_Gabriela.A.V.I")
-root.geometry("300x150")
+root.geometry("350x150")
 
 color = tk.StringVar()
 opcion_rojo = tk.Radiobutton(root, text="Rojo", variable=color, value="red", command=cambiar_color)
-opcion_rojo.pack()
+opcion_rojo.pack(pady=10)
 opcion_verde = tk.Radiobutton(root, text="Verde", variable=color, value="green", command=cambiar_color)
-opcion_verde.pack()
+opcion_verde.pack(pady=10)
 opcion_azul = tk.Radiobutton(root, text="Azul", variable=color, value="blue", command=cambiar_color)
-opcion_azul.pack()
+opcion_azul.pack(pady=10)
 
 root.mainloop()

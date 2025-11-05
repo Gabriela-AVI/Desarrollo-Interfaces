@@ -21,24 +21,24 @@ def actualizar():
 
 root = tk.Tk()
 root.title("04_Checkbutton_Gabriela.A.V.I")
-root.geometry("300x300")
+root.geometry("350x250")
 
 etiqueta = tk.Label(root, text="AFICIONES:")
 etiqueta.pack()
 
 var_check1 = tk.IntVar()
 check1 = tk.Checkbutton(root,text="Leer", variable=var_check1, command=actualizar).pack()
-check1_estado = tk.Label(root, text="No seleccionado")
+check1_estado = tk.Label(root, text="No Seleccionado")
 check1_estado.pack()
 
 var_check2 = tk.IntVar()
 check2 = tk.Checkbutton(root,text="Deporte", variable=var_check2, command=actualizar).pack()
-check2_estado = tk.Label(root, text="No seleccionado")
+check2_estado = tk.Label(root, text="No Seleccionado")
 check2_estado.pack()
 
 var_check3 = tk.IntVar()
 check3 = tk.Checkbutton(root,text="Música", variable=var_check3, command=actualizar).pack()
-check3_estado = tk.Label(root, text="No seleccionado")
+check3_estado = tk.Label(root, text="No Seleccionado")
 check3_estado.pack()
 
 root.mainloop()

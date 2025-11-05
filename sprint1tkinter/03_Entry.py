@@ -1,3 +1,4 @@
+
 # Ejercicio 3: Entry
 
 """Crea una interfaz con un campo de entrada (Entry) donde el usuario escriba su nombre.
@@ -14,15 +15,12 @@ root.title("03_Entry_Gabriela.A.V.I")
 root.geometry("300x150")
 
 etiqueta = (tk.Label(root, text="Introduzca su nombre:"))
-etiqueta.pack()
+etiqueta.pack(pady=10)
 
 nombre = tk.Entry(root)
-nombre.pack()
+nombre.pack(pady=10)
 
 boton = tk.Button(root, text="Saludar", command=saludar)
-boton.pack()
+boton.pack(pady=10)
 
 root.mainloop()
-
-
-

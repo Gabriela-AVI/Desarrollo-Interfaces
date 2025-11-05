@@ -16,7 +16,7 @@ root = tk.Tk()
 root.title("01_Label_Gabriela.A.V.I")
 root.geometry("300x150")
 
-etiqueta1 = (tk.Label(root, text="Bienvenida!"))
+etiqueta1 = tk.Label(root, text="Bienvenida!")
 etiqueta1.pack()
 
 etiqueta2 = (tk.Label(root, text="Gabriela Antía Vázquez Iglesias"))
