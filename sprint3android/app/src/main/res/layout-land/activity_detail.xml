@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
 
-    <!-- TÍTULO -->
+    <!--Título-->
     <TextView
         android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="52dp"
         android:text="Studio Ghibli"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- IMAGEN -->
     <ImageView
         android:id="@+id/imgDetalle"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/cualquiera"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/circular_shape"
         android:clipToOutline="true"
-        android:outlineProvider="background"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cualquiera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+         />
 
-    <!-- DESCRIPCIÓN -->
     <TextView
         android:id="@+id/txtDescripcion"
-        android:layout_width="398dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:text="Ha producido 23 largometrajes animados hasta la fecha, incluyendo su película más reciente, El niño y la garza."
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="@id/imgDetalle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgDetalle" />
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/imgDetalle"
+        app:layout_constraintTop_toTopOf="@id/imgDetalle"
 
-    <!-- BOTÓN -->
+        tools:ignore="RtlCompat" />
+
     <Button
         android:id="@+id/btnMeGusta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="444dp"
+        android:layout_marginBottom="24dp"
         android:text="Me gusta"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
