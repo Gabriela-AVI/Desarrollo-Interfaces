@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tú eres muy guapo"
+        android:text="¡Bienvenido a la página!"
         android:textSize="20sp"
         android:textAlignment="center"/>
 </FrameLayout>
