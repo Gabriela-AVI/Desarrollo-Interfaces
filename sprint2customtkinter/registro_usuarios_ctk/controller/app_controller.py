@@ -15,7 +15,7 @@ class AppController:
 
         self.BASE_DIR = Path(__file__).resolve().parent.parent
 
-        # Referencia de imagen panel derecho
+        # Referencia de imagen derecha
         self.avatar_preview = None
 
         # Enganchar eventos
@@ -24,6 +24,9 @@ class AppController:
 
         # Mostrar detalles al hacer clic
         self.view.lista.bind("<ButtonRelease-1>", self.mostrar_detalle)
+
+        # Filtrar por nombre
+        self.view.var_buscar.trace_add("write", lambda *args: self.actualizar_lista())
 
         # Conectar menú Archivo
         archivo_menu = self.view.menu_archivo
@@ -61,12 +64,11 @@ class AppController:
 
         modal.destroy()
 
-
     def actualizar_lista(self):
         self.view.lista.delete("1.0", "end")
-        for i, u in enumerate(self.model.listar()):
+        usuarios_filtrados = self.filtrar_usuarios()
+        for i, u in enumerate(usuarios_filtrados):
             self.view.lista.insert("end", f"{i}. {u.nombre}\n")
-
 
     def mostrar_detalle(self, event=None):
         linea = self.view.lista.get("insert linestart", "insert lineend")
@@ -98,6 +100,23 @@ class AppController:
             self.view.label_avatar.configure(image=self.avatar_preview, text="")
         else:
             self.view.label_avatar.configure(text="(avatar no encontrado)", image=None)
+
+    # Filtros
+    def filtrar_usuarios(self):
+        texto = self.view.var_buscar.get().lower().strip()
+        genero_filtro = self.view.genero_menu.get()
+
+        usuarios = self.model.listar()
+
+        # Filtrar por nombre
+        if texto:
+            usuarios = [u for u in usuarios if texto in u.nombre.lower()]
+
+        # Filtrar por género
+        if genero_filtro != "todos":
+            usuarios = [u for u in usuarios if u.genero == genero_filtro]
+
+        return usuarios
 
     # CSV
 

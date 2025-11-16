@@ -33,10 +33,14 @@ class MainView:
         # Parte superior frame (Buscar, Genero, Botones)
         self.top_frame = ctk.CTkFrame(self.frame)
         self.top_frame.pack(fill="x", pady="10")
+
             # Buscar
         ctk.CTkLabel(self.top_frame, text="Buscar:").pack(side="left", padx=5)
-        self.entry_buscar = ctk.CTkEntry(self.top_frame, width=180)
+
+        self.var_buscar = ctk.StringVar()  # Para el trace_add
+        self.entry_buscar = ctk.CTkEntry(self.top_frame, width=180, textvariable=self.var_buscar)
         self.entry_buscar.pack(side="left", padx=5)
+
             # Genero
         ctk.CTkLabel(self.top_frame, text="Género:").pack(side="left", padx=5)
         self.genero_menu = ctk.CTkOptionMenu(self.top_frame, values=["todos", "Femenino", "Masculino", "Otro"])
