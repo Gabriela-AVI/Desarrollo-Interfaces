@@ -7,7 +7,7 @@ class AddUserView(ctk.CTkToplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Añadir usuario")
-        self.geometry("350x560")
+        self.geometry("350x650")
         self.resizable(False, False)
 
         # BASE_DIR
@@ -17,7 +17,7 @@ class AddUserView(ctk.CTkToplevel):
         self.var_nombre = ctk.StringVar()
         self.var_edad = ctk.IntVar(value=18)
         self.var_genero = ctk.StringVar(value="Masculino")
-        self.var_avatar = ctk.StringVar(value="avatar1.png")
+        self.var_avatar = ctk.StringVar(value="avatar1.jpg")
 
         # NOMBRE
         ctk.CTkLabel(self, text="Nombre:").pack(anchor="w", padx=20)
@@ -48,18 +48,18 @@ class AddUserView(ctk.CTkToplevel):
                                value=g).pack(anchor="w")
 
         # AVATAR
-        ctk.CTkLabel(self, text="Avatar:").pack(anchor="w", padx=20, pady=(10, 0))
+        ctk.CTkLabel(self, text="Avatar:").pack(anchor="w", padx=20, pady=10)
         frame_avatar = ctk.CTkFrame(self)
-        frame_avatar.pack(padx=20, pady=5)
+        frame_avatar.pack(anchor="w", padx=20)
 
         # Rutas ABSOLUTAS usando Path
         self.avatars = {
-            "avatar1.png": BASE_DIR / "assets" / "avatar1.png",
-            "avatar2.png": BASE_DIR / "assets" / "avatar2.png",
-            "avatar3.png": BASE_DIR / "assets" / "avatar3.png",
+            "avatar1.jpg": BASE_DIR / "assets" / "avatar1.jpg",
+            "avatar2.jpg": BASE_DIR / "assets" / "avatar2.jpg",
+            "avatar3.jpg": BASE_DIR / "assets" / "avatar3.jpg",
         }
 
-        # Mantener referencia de imagen
+        # Referencia de imagen
         self.preview_img = None
 
         # RadioButtons avatar
@@ -70,9 +70,8 @@ class AddUserView(ctk.CTkToplevel):
                                command=self._previsualizar_avatar).pack(anchor="w")
 
         # PREVISUALIZACIÓN
-        self.label_preview = ctk.CTkLabel(self, text="(previsualización)")
+        self.label_preview = ctk.CTkLabel(self)
         self.label_preview.pack(pady=10)
-
         self._previsualizar_avatar()
 
         # BOTÓN GUARDAR
@@ -80,17 +79,19 @@ class AddUserView(ctk.CTkToplevel):
         self.btn_guardar.pack(pady=15)
 
 
+    # OTRAS FUNCIONES
+
     def _previsualizar_avatar(self):
-        ruta = self.avatars[self.var_avatar.get()]   # Ahora es un objeto Path
+        ruta = self.avatars[self.var_avatar.get()]
         img = Image.open(ruta)
-        img = img.resize((150, 150))
 
         self.preview_img = ctk.CTkImage(
             light_image=img,
-            dark_image=img
+            dark_image=img,
+            size=(150, 150)  # TAMAÑO
         )
-        self.label_preview.configure(image=self.preview_img)
 
+        self.label_preview.configure(image=self.preview_img, text="")
 
     def _actualizar_label_edad(self, value):
         self.label_valor_edad.configure(text=f"Edad: {int(float(value))}")
