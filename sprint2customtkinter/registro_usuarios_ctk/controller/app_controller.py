@@ -73,6 +73,9 @@ class AppController:
         for i, u in enumerate(usuarios_filtrados):
             self.view.lista.insert("end", f"{i}. {u.nombre}\n")
 
+        # Recuento barra de estado
+        self.set_status(f"Mostrando {len(usuarios_filtrados)} usuario(s).")
+
     def mostrar_detalle(self, event=None):
         linea = self.view.lista.get("insert linestart", "insert lineend")
         index_str = linea.split(".")[0]
@@ -121,20 +124,25 @@ class AppController:
 
         return usuarios
 
+    # Actualizar barra de estado
+    def set_status(self, msg: str):
+        self.view.status_bar.configure(text=msg)
+
     # CSV
 
     def guardar_csv_controller(self):
         if self.model.guardar_csv():
-            print("CSV guardado correctamente.")
+            self.set_status("Guardado correctamente.") #barra estado
         else:
-            print("Error al guardar CSV.")
+            self.set_status("Error al guardar CSV.") #barra estado
 
     def cargar_csv_controller(self):
         if self.model.cargar_csv():
-            print("CSV cargado")
+            self.set_status("CSV cargado correctamente.") #barra estado
             self.actualizar_lista()
         else:
-            print("Error al cargar CSV")
+            self.set_status("Error al cargar CSV.") #barra estado
+
 
     # Eliminar
 

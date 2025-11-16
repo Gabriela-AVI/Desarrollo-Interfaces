@@ -85,5 +85,10 @@ class MainView:
         self.label_genero = ctk.CTkLabel(self.panel, text="Género: -", anchor="w", justify="left")
         self.label_genero.pack(pady=5, fill="x", padx=10)
 
+        # Barra de estado
+        self.status_bar = ctk.CTkLabel(root, text="Listo", anchor="w")
+        self.status_bar.pack(fill="x", padx=10, pady=(0, 5))
+
+
     def on_genero_change(self, value):
         pass
