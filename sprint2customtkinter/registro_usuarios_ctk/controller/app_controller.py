@@ -18,9 +18,14 @@ class AppController:
         # Referencia de imagen derecha
         self.avatar_preview = None
 
+        # Auto-guardado
+        self.autosave_running = False
+        self.autosave_thread = None
+
         # Enganchar eventos
         self.view.btn_añadir.configure(command=self.abrir_modal_añadir)
         self.view.btn_eliminar.configure(command=self.eliminar_usuario)
+        self.view.btn_autosave.configure(command=self.toggle_autosave) #auto-guardado
 
         # Mostrar detalles al hacer clic
         self.view.lista.bind("<ButtonRelease-1>", self.mostrar_detalle)
@@ -203,5 +208,20 @@ class AppController:
         self.set_status("Usuario actualizado correctamente.")
 
         modal.destroy()
+
+    # Auto-guardado
+    def toggle_autosave(self):
+        # Apagado a encendido
+        if not self.autosave_running:
+            self.autosave_running = True
+            self.view.btn_autosave.configure(text="Auto-Guardar: ON")
+            self.start_autosave_thread()
+            self.set_status("Auto-guardado activado.")
+
+        # Encendido a apagado
+        else:
+            self.autosave_running = False
+            self.view.btn_autosave.configure(text="Auto-Guardar: OFF")
+            self.set_status("Auto-guardado detenido.")
 
 

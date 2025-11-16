@@ -56,6 +56,7 @@ class MainView:
         self.btn_eliminar = ctk.CTkButton(self.top_frame, text="Eliminar", width=150)
         self.btn_eliminar.pack(side="right", padx=10)
 
+
     # Parte principal frame
         self.frame_principal = ctk.CTkFrame(self.frame)
         self.frame_principal.pack(fill="both", expand=True, pady=5)
@@ -88,6 +89,10 @@ class MainView:
         # Barra de estado
         self.status_bar = ctk.CTkLabel(root, text="Listo", anchor="w")
         self.status_bar.pack(fill="x", padx=10, pady=(0, 5))
+
+        # Auto-guardar
+        self.btn_autosave = ctk.CTkButton(root, text="Auto-guardar(10s): OFF", width=200)
+        self.btn_autosave.pack(pady=(0, 10))
 
 
     def on_genero_change(self, value):
