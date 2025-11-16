@@ -13,7 +13,6 @@ class AppController:
         self.model = GestorUsuarios()
         self.view = MainView(root)
 
-        # BASE_DIR = carpeta raíz del proyecto (/mi_proyecto/)
         self.BASE_DIR = Path(__file__).resolve().parent.parent
 
         # Referencia de imagen panel derecho
@@ -25,6 +24,14 @@ class AppController:
 
         # Mostrar detalles al hacer clic
         self.view.lista.bind("<ButtonRelease-1>", self.mostrar_detalle)
+
+        # Conectar menú Archivo
+        archivo_menu = self.view.menu_archivo
+        archivo_menu.entryconfig(0, command=self.guardar_csv_controller)  # Guardar CSV
+        archivo_menu.entryconfig(1, command=self.cargar_csv_controller)  # Cargar CSV
+
+
+    # Añadir usuario
 
     def abrir_modal_añadir(self):
         modal = AddUserView(self.view.root)
@@ -45,7 +52,7 @@ class AppController:
         if not (0 <= edad <= 100):
             return
 
-        # Guardamos solo el nombre del archivo
+        # Guardamos nombre del archivo
         nuevo = Usuario(nombre, edad, genero, avatar_file)
         self.model.añadir(nuevo)
 
@@ -81,7 +88,7 @@ class AppController:
         self.view.label_edad.configure(text=f"Edad: {u.edad}")
         self.view.label_genero.configure(text=f"Género: {u.genero}")
 
-        # Ruta a la imagen → assets/avatarX.png
+        # Ruta imagen
         ruta = self.BASE_DIR / "assets" / u.avatar
 
         # Cargar avatar
@@ -92,6 +99,22 @@ class AppController:
         else:
             self.view.label_avatar.configure(text="(avatar no encontrado)", image=None)
 
+    # CSV
+
+    def guardar_csv_controller(self):
+        if self.model.guardar_csv():
+            print("CSV guardado correctamente.")
+        else:
+            print("Error al guardar CSV.")
+
+    def cargar_csv_controller(self):
+        if self.model.cargar_csv():
+            print("CSV cargado")
+            self.actualizar_lista()
+        else:
+            print("Error al cargar CSV")
+
+    # Eliminar
 
     def eliminar_usuario(self):
         pass

@@ -24,6 +24,7 @@ class MainView:
         menu_archivo.add_separator() #Sepador
         menu_archivo.add_command(label="Salir", command=root.destroy)
 
+        self.menu_archivo = menu_archivo
 
     # Frame inicio
         self.frame = ctk.CTkFrame(root)
