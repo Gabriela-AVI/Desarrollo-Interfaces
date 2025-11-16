@@ -1,4 +1,6 @@
 # Clases Usuario y GestorUsuarios (lógica y datos)
+import csv
+
 
 class Usuario:
     def __init__(self, nombre: str, edad: int, genero: str, avatar: str):
@@ -24,7 +26,23 @@ class GestorUsuarios:
         ...
 
     def guardar_csv(self, ruta: str = "usuarios.csv"):
-        ...
+        # Guardar todos los usuarios
+        try:
+            with open(ruta, "w", encoding="utf-8", newline="") as f:
+                writer = csv.writer(f)
+
+                # Cabecera
+                writer.writerow(["nombre", "edad", "genero", "avatar"])
+
+                # Filas (nombre, edad, genero, avatar-file)
+                for u in self._usuarios:
+                    writer.writerow([u.nombre, u.edad, u.genero, u.avatar])
+
+            return True  #éxito
+
+        except Exception as e:
+            print("Error al guardar CSV:", e)
+            return False  #
 
     def cargar_csv(self, ruta: str = "usuarios.csv"):
         ...

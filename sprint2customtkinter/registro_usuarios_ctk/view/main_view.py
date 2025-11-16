@@ -7,32 +7,40 @@ class MainView:
     def __init__(self, root):
         self.root = root
 
-    # Menu (Archivo, Ayuda)
+    # Menu
         menubar = Menu(root)
         root.config(menu=menubar)
-        # Menú "Archivo"
+
+        # Menú Archivo
         menu_archivo = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Archivo", menu=menu_archivo)
-        # Menú "Ayuda"
+        # Menú Ayuda
         menu_ayuda = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Ayuda", menu=menu_ayuda)
+
+        # Menu Opciones Archivo (Guardar, Cargar, Salir)
+        menu_archivo.add_command(label="Guardar")
+        menu_archivo.add_command(label="Cargar")
+        menu_archivo.add_separator() #Sepador
+        menu_archivo.add_command(label="Salir", command=root.destroy)
+
 
     # Frame inicio
         self.frame = ctk.CTkFrame(root)
         self.frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-    # Parte superior frame (Buscar, Genero, Botones)
+        # Parte superior frame (Buscar, Genero, Botones)
         self.top_frame = ctk.CTkFrame(self.frame)
         self.top_frame.pack(fill="x", pady="10")
-        # Buscar
+            # Buscar
         ctk.CTkLabel(self.top_frame, text="Buscar:").pack(side="left", padx=5)
         self.entry_buscar = ctk.CTkEntry(self.top_frame, width=180)
         self.entry_buscar.pack(side="left", padx=5)
-        # Genero
+            # Genero
         ctk.CTkLabel(self.top_frame, text="Género:").pack(side="left", padx=5)
         self.genero_menu = ctk.CTkOptionMenu(self.top_frame, values=["todos", "Femenino", "Masculino", "Otro"])
         self.genero_menu.pack(side="left")
-        # Botones (Añadir, Eliminar)
+            # Botones (Añadir, Eliminar)
         self.btn_añadir = ctk.CTkButton(self.top_frame, text="Añadir", width=150)
         self.btn_añadir.pack(side="right", padx=5)
         self.btn_eliminar = ctk.CTkButton(self.top_frame, text="Eliminar", width=150)
