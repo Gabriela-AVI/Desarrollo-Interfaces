@@ -28,6 +28,9 @@ class AppController:
         # Filtrar por nombre
         self.view.var_buscar.trace_add("write", lambda *args: self.actualizar_lista())
 
+        # Filtrar por género
+        self.view.genero_menu.configure(command=lambda _: self.actualizar_lista())
+
         # Conectar menú Archivo
         archivo_menu = self.view.menu_archivo
         archivo_menu.entryconfig(0, command=self.guardar_csv_controller)  # Guardar CSV

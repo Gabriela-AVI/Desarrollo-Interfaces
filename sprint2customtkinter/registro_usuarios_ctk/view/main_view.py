@@ -43,8 +43,13 @@ class MainView:
 
             # Genero
         ctk.CTkLabel(self.top_frame, text="Género:").pack(side="left", padx=5)
-        self.genero_menu = ctk.CTkOptionMenu(self.top_frame, values=["todos", "Femenino", "Masculino", "Otro"])
+        self.genero_menu = ctk.CTkOptionMenu(
+            self.top_frame,
+            values=["todos", "Femenino", "Masculino", "Otro"],
+            command=self.on_genero_change
+        )
         self.genero_menu.pack(side="left")
+
             # Botones (Añadir, Eliminar)
         self.btn_añadir = ctk.CTkButton(self.top_frame, text="Añadir", width=150)
         self.btn_añadir.pack(side="right", padx=5)
@@ -80,3 +85,5 @@ class MainView:
         self.label_genero = ctk.CTkLabel(self.panel, text="Género: -", anchor="w", justify="left")
         self.label_genero.pack(pady=5, fill="x", padx=10)
 
+    def on_genero_change(self, value):
+        pass
