@@ -8,6 +8,9 @@ import customtkinter as ctk
 from PIL import Image
 from pathlib import Path
 
+import threading
+import time
+
 class AppController:
     def __init__(self, root):
         self.model = GestorUsuarios()
@@ -224,4 +227,24 @@ class AppController:
             self.view.btn_autosave.configure(text="Auto-Guardar: OFF")
             self.set_status("Auto-guardado detenido.")
 
+    # Auto-guardado
+    def start_autosave_thread(self):
+        def autosave_loop():
+            while self.autosave_running:
+                time.sleep(10)  # Esperar 10seg
 
+                # Guardar CSV
+                self.model.guardar_csv()
+
+                # Actualizar barra de estado (main_view)
+                self.view.root.after(
+                    0,
+                    lambda: self.set_status("Auto-guardado OK.")
+                )
+
+        # Crear hilo
+        self.autosave_thread = threading.Thread(target=autosave_loop, daemon=True)
+        self.autosave_thread.start()
+
+    def detener_autosave(self):
+        self.autosave_running = False

@@ -12,4 +12,11 @@ if __name__ == "__main__":
     app.geometry("900x600")
 
     controller = AppController(app)  # crear modelo y vista
+
+    # Deterner autoguardado
+    app.protocol(
+        "WM_DELETE_WINDOW",
+        lambda: (controller.detener_autosave(), app.destroy())
+    )
+
     app.mainloop()
