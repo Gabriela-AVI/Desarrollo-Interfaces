@@ -25,6 +25,9 @@ class AppController:
         # Mostrar detalles al hacer clic
         self.view.lista.bind("<ButtonRelease-1>", self.mostrar_detalle)
 
+        # Editar usuario
+        self.view.lista.bind("<Double-Button-1>", self.abrir_modal_editar)
+
         # Filtrar por nombre
         self.view.var_buscar.trace_add("write", lambda *args: self.actualizar_lista())
 
@@ -74,7 +77,7 @@ class AppController:
             self.view.lista.insert("end", f"{i}. {u.nombre}\n")
 
         # Recuento barra de estado
-        self.set_status(f"Mostrando {len(usuarios_filtrados)} usuario(s).")
+        self.set_status(f"{len(usuarios_filtrados)} usuarios visibles.")
 
     def mostrar_detalle(self, event=None):
         linea = self.view.lista.get("insert linestart", "insert lineend")
@@ -129,7 +132,6 @@ class AppController:
         self.view.status_bar.configure(text=msg)
 
     # CSV
-
     def guardar_csv_controller(self):
         if self.model.guardar_csv():
             self.set_status("Guardado correctamente.") #barra estado
@@ -145,7 +147,61 @@ class AppController:
 
 
     # Eliminar
-
     def eliminar_usuario(self):
         pass
+
+    def abrir_modal_editar(self, event=None):
+        # Obtener usuario seleccionado
+        linea = self.view.lista.get("insert linestart", "insert lineend")
+        index_str = linea.split(".")[0]
+        if not index_str.isdigit():
+            return
+
+        indice = int(index_str)
+        usuarios = self.filtrar_usuarios()
+        if indice < 0 or indice >= len(usuarios):
+            return
+
+        usuario = usuarios[indice]
+
+        # Crear ventana modal
+        modal = AddUserView(self.view.root)
+
+        # --- Precargar datos ---
+        modal.var_nombre.set(usuario.nombre)
+        modal.var_edad.set(usuario.edad)
+        modal.var_genero.set(usuario.genero)
+        modal.var_avatar.set(usuario.avatar)
+        modal._previsualizar_avatar()
+
+        # Cambiar texto botón guardar
+        modal.btn_guardar.configure(text="Actualizar")
+
+        # Conectar acción actualizar
+        modal.btn_guardar.configure(
+            command=lambda: self.actualizar_usuario(indice, modal)
+        )
+
+    def actualizar_usuario(self, indice, modal):
+        nombre = modal.var_nombre.get().strip()
+        edad = modal.var_edad.get()
+        genero = modal.var_genero.get()
+        avatar_file = modal.var_avatar.get()
+
+        if not nombre or not (0 <= edad <= 100):
+            self.set_status("Datos inválidos.")
+            return
+
+        # Creamos usuario actualizado
+        usuario_actualizado = Usuario(nombre, edad, genero, avatar_file)
+
+        # Actualizar en el modelo
+        self.model.actualizar(indice, usuario_actualizado)
+
+        # Actualizar interfaz
+        self.actualizar_lista()
+        self.set_status("Usuario actualizado correctamente.")
+
+        modal.destroy()
+
 

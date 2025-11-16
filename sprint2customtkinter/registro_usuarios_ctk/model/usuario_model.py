@@ -23,7 +23,8 @@ class GestorUsuarios:
         ...
 
     def actualizar(self, indice: int, usuario_actualizado: Usuario):
-        ...
+        if 0 <= indice < len(self._usuarios):
+            self._usuarios[indice] = usuario_actualizado
 
     def guardar_csv(self, ruta: str = "usuarios.csv"):
         # Guardar todos los usuarios
