@@ -15,20 +15,16 @@ class GestorUsuarios:
         return list(self._usuarios)
 
     def añadir(self, usuario: Usuario):
-        # validaciones mínimas (nombre no vacío, edad en rango, genero permitido)
         self._usuarios.append(usuario)
 
     def eliminar(self, indice: int):
-        # controlar índices fuera de rango
         ...
 
     def actualizar(self, indice: int, usuario_actualizado: Usuario):
         ...
 
     def guardar_csv(self, ruta: str = "usuarios.csv"):
-        # csv.writer, utf-8, newline='', try/except
         ...
 
     def cargar_csv(self, ruta: str = "usuarios.csv"):
-        # limpia y repuebla _usuarios; maneja FileNotFoundError y filas corruptas
         ...
