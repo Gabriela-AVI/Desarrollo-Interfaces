@@ -112,8 +112,8 @@ class AppController:
 
         # Cargar avatar
         if ruta.exists():
-            img = Image.open(ruta).resize((160, 160))
-            self.avatar_preview = ctk.CTkImage(light_image=img, dark_image=img)
+            img = Image.open(ruta).resize((300, 300))
+            self.avatar_preview = ctk.CTkImage( light_image=img, dark_image=img, size=(200, 200))
             self.view.label_avatar.configure(image=self.avatar_preview, text="")
         else:
             self.view.label_avatar.configure(text="(avatar no encontrado)", image=None)
