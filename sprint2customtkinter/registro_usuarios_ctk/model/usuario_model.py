@@ -20,7 +20,8 @@ class GestorUsuarios:
         self._usuarios.append(usuario)
 
     def eliminar(self, indice: int):
-        ...
+        if 0 <= indice < len(self._usuarios):
+            self._usuarios.pop(indice)
 
     def actualizar(self, indice: int, usuario_actualizado: Usuario):
         if 0 <= indice < len(self._usuarios):

@@ -156,7 +156,37 @@ class AppController:
 
     # Eliminar
     def eliminar_usuario(self):
-        pass
+        # Obtener la línea seleccionada en la lista
+        linea = self.view.lista.get("insert linestart", "insert lineend")
+        index_str = linea.split(".")[0]
+
+        if not index_str.isdigit():
+            self.set_status("No hay usuario seleccionado.")
+            return
+
+        indice_filtrado = int(index_str)
+
+        # Obtener la lista filtrada (no la completa)
+        usuarios_filtrados = self.filtrar_usuarios()
+
+        if not (0 <= indice_filtrado < len(usuarios_filtrados)):
+            self.set_status("Selección inválida.")
+            return
+
+        # Usuario que realmente queremos borrar
+        usuario_objetivo = usuarios_filtrados[indice_filtrado]
+
+        # Buscar su índice real en la lista completa
+        usuarios_completos = self.model.listar()
+        indice_real = usuarios_completos.index(usuario_objetivo)
+
+        # Eliminar en el modelo
+        self.model.eliminar(indice_real)
+
+        # Actualizar UI
+        self.actualizar_lista()
+        self.set_status("Usuario eliminado correctamente.")
+
 
     def abrir_modal_editar(self, event=None):
         # Obtener usuario seleccionado
