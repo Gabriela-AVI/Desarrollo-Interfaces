@@ -4,7 +4,7 @@ package com.example.aula.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryNoticeRepository { 
+public class InMemoryNoticeRepository {
 
     private final List<String> database = new ArrayList<>();
 
