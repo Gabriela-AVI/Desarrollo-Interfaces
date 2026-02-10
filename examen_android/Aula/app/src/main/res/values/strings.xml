@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Aula+</string>
+
+    <!-- EJERCICIO 3 -->
+    <!-- Home -->
+    <string name="aula_home">Aula+ (Home)</string>
+    <string name="cd_add_notice">Añadir aviso</string>
+
+    <string name="delete_last_notice">Borrar último</string>
+
+    <string name="notice_name">Título del aviso</string>
+    <string name="materia_notice">Materia (DI, SI, DWES...)</string>
+
+    <!-- Profile-->
+    <string name="cd_logout">Cerrar sesión</string>
+
+    <!-- LOGIN -->
+    <string name="login">Entrar</string>
+    <string name="go_register">Regístrate</string>
+    <string name="without_count">¿No tienes cuenta?</string>
+    <string name="app_login">Aula+ — Login</string>
+
+    <string name="password">Contraseña</string>
+
+    <!-- REGISTER -->
+    <string name="app_register">Aula+ — Registro</string>
+    <string name="repit_password">Repetir contraseña</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="with_account">Ya tengo cuenta</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- EJERCICIO 3 -->
+    <string name="cd_add_notice">Añadir aviso</string>
+    <string name="cd_logout">Cerrar sesión</string>
+    <string name="delete_last_notice">Borrar último</string>
+
+    <string name="notice_name">Título del aviso</string>
+    <string name="materia_notice">Materia (DI, SI, DWES...)</string>
+
+    <string name="aula_home">Aula+ (Home)</string>
+</resources>
